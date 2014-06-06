@@ -1,0 +1,27 @@
+<%= image_tag @blog.image.url(:large), :id => "cropbox" %>
+<%= form_for @blog do |form| %>
+  <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+    <%= form.text_field attribute, :id => attribute %>
+  <% end %>
+  <p><%= form.submit "Crop" %></p>
+<% end %>
+
+<script>
+$(function() {
+  $('#cropbox').Jcrop({
+    onChange: update_crop,
+    onSelect: update_crop,
+    setSelect: [0, 0, 500, 500],
+    aspectRatio: 1
+  });
+});
+
+function update_crop(coords) {
+  var ratio = <%= @blog.avatar_geometry(:original).width %> / <%= @blog.avatar_geometry(:large).width %>; 
+  $('#crop_x').val(Math.floor(coords.x * ratio));
+  $('#crop_y').val(Math.floor(coords.y * ratio));
+  $('#crop_w').val(Math.floor(coords.w * ratio));
+  $('#crop_h').val(Math.floor(coords.h * ratio));  
+}
+
+</script>

@@ -1,4 +1,21 @@
-<%= image_tag @blog.image.url(:large), :id => "cropbox" %>
+<div id="layer_content">
+
+
+   
+    <div id="body"><div class="widther">
+
+
+<div id="jwc_demos">
+  <div class="jwc_con_right">
+    <img class="jwc_demo2" src="<%= @blog.image.url(:large)%>" alt="jWindowCrop Demo" data-target="#jwc_r2" />
+  </div>
+</div>
+
+<div id="jwc_demos_result">
+  <span id="jwc_r2"></span>
+</div>
+
+
 <%= form_for @blog do |form| %>
   <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
     <%= form.text_field attribute, :id => attribute %>
@@ -6,22 +23,32 @@
   <p><%= form.submit "Crop" %></p>
 <% end %>
 
+
 <script>
-$(function() {
-  $('#cropbox').Jcrop({
-    onChange: update_crop,
-    onSelect: update_crop,
-    setSelect: [0, 0, 500, 500],
-    aspectRatio: 1
+  $(function() {
+    $('.jwc_demo2').jWindowCrop({
+      targetWidth: 660, targetHeight: 120,
+      onChange: updateCoords
+    });
   });
-});
 
-function update_crop(coords) {
-  var ratio = <%= @blog.avatar_geometry(:original).width %> / <%= @blog.avatar_geometry(:large).width %>; 
-  $('#crop_x').val(Math.floor(coords.x * ratio));
-  $('#crop_y').val(Math.floor(coords.y * ratio));
-  $('#crop_w').val(Math.floor(coords.w * ratio));
-  $('#crop_h').val(Math.floor(coords.h * ratio));  
-}
-
+  function updateCoords(data) {
+    var ratio = <%= @blog.avatar_geometry(:original).width %> / <%= @blog.avatar_geometry(:large).width %>;
+    $('#crop_x').val(Math.floor(data.cropX * ratio));
+    $('#crop_y').val(Math.floor(data.cropY * ratio));
+    $('#crop_w').val(Math.floor(data.cropW * ratio));
+    $('#crop_h').val(Math.floor(data.cropH * ratio));
+  
+    //var result_target = $(this).data('target');
+    //var results = "x:"+data.cropX + " y:"+data.cropY + " w:"+data.cropW + " h:"+data.cropH;
+    //$(result_target).text(results);
+  }
 </script>
+
+
+    </div></div>
+
+
+        
+
+  </div>
