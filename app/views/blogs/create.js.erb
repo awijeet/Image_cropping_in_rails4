@@ -1,6 +1,6 @@
-<%= render "cropper" %>
+$("#cropperimageformid").html("<%= escape_javascript(render 'cropper')%>");
 
-<script>
+
   $(function() {
     $('.jwc_demo2').jWindowCrop({
       targetWidth: 660, targetHeight: 120,
@@ -19,4 +19,4 @@
     //var results = "x:"+data.cropX + " y:"+data.cropY + " w:"+data.cropW + " h:"+data.cropH;
     //$(result_target).text(results);
   }
-</script>
+  

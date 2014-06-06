@@ -1,4 +1,4 @@
-<%= form_for(@blog, :multipart => true) do |f| %>
+<%= form_for(@blog, remote: true, multipart: true) do |f| %>
   <% if @blog.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
@@ -26,3 +26,4 @@
     <%= f.submit %>
   </div>
 <% end %>
+<div id="cropperimageformid"></div>

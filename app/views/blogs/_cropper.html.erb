@@ -1,0 +1,33 @@
+<div id="layer_content">
+
+
+   
+    <div id="body"><div class="widther">
+
+
+<div id="jwc_demos">
+  <div class="jwc_con_right">
+    <img class="jwc_demo2" src="<%= @blog.image.url(:large)%>" alt="jWindowCrop Demo" data-target="#jwc_r2" />
+  </div>
+</div>
+
+<div id="jwc_demos_result">
+  <span id="jwc_r2"></span>
+</div>
+
+
+<%= form_for @blog do |form| %>
+  <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+    <%= form.text_field attribute, :id => attribute %>
+  <% end %>
+  <p><%= form.submit "Crop" %></p>
+<% end %>
+
+
+    </div></div>
+
+
+        
+
+  </div>
+  
