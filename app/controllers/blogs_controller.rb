@@ -24,12 +24,20 @@ class BlogsController < ApplicationController
   # POST /blogs
   # POST /blogs.json
   def create
-    @blog = Blog.new(blog_params)
-      if @blog.save
-        render "cropper"
-      else
-        render :new 
+    # @blog = Blog.new(blog_params)
+      # if @blog.save
+        # render "cropper"
+      # else
+        # render :new 
+      # end
+      @blog = Blog.new(blog_params)
+      respond_to do |format|
+        if @blog.save
+          format.js
+        else
+        end    
       end
+      
   end
 
   # PATCH/PUT /blogs/1

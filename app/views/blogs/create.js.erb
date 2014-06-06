@@ -1,5 +1,4 @@
-<%= render "cropper" %>
-<script>
+$("#cropperimageformid").html("<%= escape_javascript(render 'cropper')%>");
 $(function() {
   $('#cropbox').Jcrop({
     onChange: update_crop,
@@ -17,4 +16,3 @@ function update_crop(coords) {
   $('#crop_h').val(Math.floor(coords.h * ratio));  
 }
 
-</script>

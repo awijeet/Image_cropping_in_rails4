@@ -1,0 +1,7 @@
+<%= image_tag @blog.image.url(:large), :id => "cropbox" %>
+<%= form_for @blog do |form| %>
+  <% for attribute in [:crop_x, :crop_y, :crop_w, :crop_h] %>
+    <%= form.text_field attribute, :id => attribute %>
+  <% end %>
+  <p><%= form.submit "Crop" %></p>
+<% end %>
