@@ -26,24 +26,28 @@ class BlogsController < ApplicationController
   def create
     @blog = Blog.new(blog_params)
       if @blog.save
-        render "cropper"
+        if params[:blog][:image].blank?
+          redirect_to @blog, notice: 'Blog was successfully created.'
+        else
+          render "cropper"
+        end
       else
-        render :new 
+        render :new
       end
   end
 
   # PATCH/PUT /blogs/1
   # PATCH/PUT /blogs/1.json
   def update
-    respond_to do |format|
-      if @blog.update(blog_params)
-        @blog.reprocess_avatar
-        format.html { redirect_to @blog, notice: 'Blog was successfully updated.' }
-        format.json { render :show, status: :ok, location: @blog }
+    if @blog.update(blog_params)
+      if params[:blog][:image].blank?
+        redirect_to @blog, notice: 'Blog was successfully updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @blog.errors, status: :unprocessable_entity }
+        render "cropper"
       end
+    else
+      format.html { render :edit }
+      format.json { render json: @blog.errors, status: :unprocessable_entity }
     end
   end
 
