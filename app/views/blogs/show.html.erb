@@ -1,17 +1,23 @@
 <p id="notice"><%= notice %></p>
 
+<%= link_to 'Edit', edit_blog_path(@blog) %> |
+<%= link_to 'Back', blogs_path %>
+
 <p>
   <strong>Title:</strong>
   <%= @blog.title %>
 </p>
-
 <p>
   <strong>Description:</strong>
   <%= @blog.description %>
 </p>
+<!-- Show image versions -->
 <p>
   <%= image_tag @blog.image.url(:small) %>
 </p>
-
-<%= link_to 'Edit', edit_blog_path(@blog) %> |
-<%= link_to 'Back', blogs_path %>
+<p>
+  <%= image_tag @blog.image.url(:large) %>
+</p>
+<p>
+  <%= image_tag @blog.image.url(:original) %>
+</p>
